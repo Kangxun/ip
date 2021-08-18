@@ -60,49 +60,57 @@ public class Duke {
                     System.out.println("  [" + type + "][X] " + cmdList[itemNo - 1]);
                 } else {
                     System.out.println(line);
-                    cmdList[count] = cmd;
-                    count++;
-                    System.out.println("added: " + cmd);
+                    System.out.println(" ☹ sorry..i cant seem to find the task you're looking for");
                 }
                 System.out.println(line);
             } else if (cmd.matches("^todo .*$")
                     || cmd.matches("^deadline .* /by .*$")
                     || cmd.matches("^event .* /at .*$")) {
                 String[] temp = cmd.split(" ", 2);
+                if (temp[1].equals("")) {
+                    System.out.println(line);
+                    System.out.println(" ☹ oh noes..the description of a " + temp[0] + " cannot be empty");
+                    System.out.println(line);
+                } else {
+                    System.out.println(line);
+                    System.out.println("noted! ive added this task:");
 
-                System.out.println(line);
-                System.out.println("noted! ive added this task:");
-
-                // Separate into cases
-                switch (temp[0]) {
-                    case "todo":
-                        typeList[count] = "T";
-                        cmdList[count] = temp[1];
-                        System.out.println("  [" + typeList[count] + "][ ] " + cmdList[count]);
-                        break;
-                    case "deadline":
-                        typeList[count] = "D";
-                        String[] temp_deadline = temp[1].split(" /by ", 2);
-                        cmdList[count] = temp_deadline[0] + " (by: " + temp_deadline[1] +")";
-                        System.out.println("  [" + typeList[count] + "][ ] " + cmdList[count]);
-                        break;
-                    case "event":
-                        typeList[count] = "E";
-                        String[] temp_event = temp[1].split(" /at ", 2);
-                        cmdList[count] = temp_event[0] + " (at: " + temp_event[1] +")";
-                        String type3 = typeList[count];
-                        System.out.println("  [" + typeList[count] + "][ ] " + cmdList[count]);
-                        break;
+                    // Separate into cases
+                    switch (temp[0]) {
+                        case "todo":
+                            typeList[count] = "T";
+                            cmdList[count] = temp[1];
+                            System.out.println("  [" + typeList[count] + "][ ] " + cmdList[count]);
+                            break;
+                        case "deadline":
+                            typeList[count] = "D";
+                            String[] temp_deadline = temp[1].split(" /by ", 2);
+                            cmdList[count] = temp_deadline[0] + " (by: " + temp_deadline[1] + ")";
+                            System.out.println("  [" + typeList[count] + "][ ] " + cmdList[count]);
+                            break;
+                        case "event":
+                            typeList[count] = "E";
+                            String[] temp_event = temp[1].split(" /at ", 2);
+                            cmdList[count] = temp_event[0] + " (at: " + temp_event[1] + ")";
+                            String type3 = typeList[count];
+                            System.out.println("  [" + typeList[count] + "][ ] " + cmdList[count]);
+                            break;
+                    }
+                    count++;
+                    System.out.println("now you have " + count + " tasks in your list");
+                    System.out.println(line);
                 }
-                count++;
-                System.out.println("now you have " + count + " tasks in your list");
-                System.out.println(line);
             } else {
-                System.out.println(line);
-                cmdList[count] = cmd;
-                count++;
-                System.out.println("added: " + cmd);
-                System.out.println(line);
+                // Error handling for todo, deadline & event
+                if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
+                    System.out.println(line);
+                    System.out.println(" ☹ oh noes..the description of a " + cmd + " cannot be empty");
+                    System.out.println(line);
+                } else {
+                    System.out.println(line);
+                    System.out.println(" ☹ oops..im sorry, but i dont know what that means :(");
+                    System.out.println(line);
+                }
             }
             cmd = sc.nextLine();
         }
