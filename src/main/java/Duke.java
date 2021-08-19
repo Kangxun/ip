@@ -100,6 +100,33 @@ public class Duke {
                     System.out.println("now you have " + count + " tasks in your list");
                     System.out.println(line);
                 }
+            } else if (cmd.matches("^delete [0-9]+$")) {
+                String[] temp = cmd.split(" ");
+                int itemNo = Integer.parseInt(temp[1]);
+
+                // Make sure itemNo is within limit
+                if ((itemNo <= count) && (itemNo > 0)) {
+                    String type = " ";
+                    if (typeList[itemNo - 1] != null) {
+                        type = typeList[itemNo - 1];
+                    }
+
+                    // Remove item from lists
+                    for (int i = itemNo; i < count; i++) {
+                        checkedList[i - 1] = checkedList[i];
+                        typeList[i - 1] = typeList[i];
+                        cmdList[i - 1] = cmdList[i];
+                    }
+                    System.out.println(line);
+                    System.out.println("ok, ive deleted this task :");
+                    System.out.println("  [" + type + "][X] " + cmdList[itemNo - 1]);
+                    count--;
+                    System.out.println("now you have " + count + " tasks in your list");
+                } else {
+                    System.out.println(line);
+                    System.out.println(" ☹ sorry..i cant seem to find the task you're looking for");
+                }
+                System.out.println(line);
             } else {
                 // Error handling for todo, deadline & event
                 if (cmd.equals("todo") || cmd.equals("deadline") || cmd.equals("event")) {
