@@ -12,7 +12,6 @@ public class Parser {
      */
     public static int parseDoneCmd(String cmd) {
         String[] a = cmd.split(" ");
-        assert a.getClass().isArray() : "a should be an array";
         return Integer.parseInt(a[1]);
     }
 
@@ -66,7 +65,6 @@ public class Parser {
      */
     public static boolean isMissingArg(String cmd) {
         String[] a = cmd.split(" ", 2);
-        assert a.getClass().isArray() : "a should be an array";
         return a[1].matches(" *");
     }
 
@@ -78,7 +76,6 @@ public class Parser {
      */
     public static String getTaskName(String cmd) {
         String[] a = cmd.split(" ", 2);
-        assert a.getClass().isArray() : "a should be an array";
         return a[0];
     }
 
@@ -90,7 +87,6 @@ public class Parser {
      */
     public static String getDesc(String cmd) {
         String[] a = cmd.split(" ", 2);
-        assert a.getClass().isArray() : "a should be an array";
         return a[1];
     }
 
@@ -102,7 +98,6 @@ public class Parser {
      */
     public static String getDeadlineInfo(String desc) {
         String[] a = desc.split(" /by ", 2);
-        assert a.getClass().isArray() : "a should be an array";
         return a[0];
     }
 
@@ -114,7 +109,6 @@ public class Parser {
      */
     public static String getDeadlineDue(String desc) {
         String[] a = desc.split(" /by ", 2);
-        assert a.getClass().isArray() : "a should be an array";
         return a[1];
     }
 
@@ -126,7 +120,6 @@ public class Parser {
      */
     public static String getEventInfo(String desc) {
         String[] a = desc.split(" /at ", 2);
-        assert a.getClass().isArray() : "a should be an array";
         return a[0];
     }
 
@@ -138,7 +131,6 @@ public class Parser {
      */
     public static String getEventDue(String desc) {
         String[] a = desc.split(" /at ", 2);
-        assert a.getClass().isArray() : "a should be an array";
         return a[1];
     }
 
@@ -160,7 +152,6 @@ public class Parser {
      */
     public static int parseDeleteCmd(String cmd) {
         String[] a = cmd.split(" ");
-        assert a.getClass().isArray() : "a should be an array";
         return Integer.parseInt(a[1]);
     }
 

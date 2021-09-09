@@ -47,7 +47,6 @@ public class Storage {
                 f.delete();
             }
             f.createNewFile();
-            assert f.exists() : "File f should be created";
             FileWriter fw = new FileWriter(filePath);
 
             // write to file
@@ -76,26 +75,25 @@ public class Storage {
             while (s.hasNext()) {
                 Task t;
                 String c = s.nextLine();
-                String[] taskParts = c.split(",");
-                assert taskParts.getClass().isArray() : "taskComponents should be an array";
+                String[] temp = c.split(",");
 
                 // Check type of Task
-                switch (taskParts[0]) {
+                switch (temp[0]) {
                 case "T":
-                    t = new Todo(taskParts[2]);
+                    t = new Todo(temp[2]);
                     break;
                 case "D":
-                    t = new Deadline(taskParts[2], taskParts[3]);
+                    t = new Deadline(temp[2], temp[3]);
                     break;
                 case "E":
-                    t = new Event(taskParts[2], taskParts[3]);
+                    t = new Event(temp[2], temp[3]);
                     break;
                 default:
-                    throw new DukeException("Invalid task type when loading: " + taskParts[0]);
+                    throw new DukeException("Invalid task type when loading: " + temp[0]);
                 }
 
                 // Check if task is completed
-                if (taskParts[1].equals("X")) {
+                if (temp[1].equals("X")) {
                     t.markDone();
                 }
                 tasks.add(t);
@@ -104,7 +102,6 @@ public class Storage {
             try {
                 // create new file if not found
                 f.createNewFile();
-                assert f.exists() : "File f should be created";
             } catch (IOException g) {
                 // throws error if file cannot be created
                 throw new DukeException(g.getMessage());
